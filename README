@@ -1,0 +1,49 @@
+LDPC over GF(q)
+
+This repository implements LDPC over GF(q). 
+
+ldpc_codec.c:
+  Copyright 2018 Frederik M.J. Vestre under GPL / 3 cause BSD. Derivative works may be distributed under only one license at their discretion. The sllr_fft function is not written by me and thus covered by this copyright; i believe it is either copyright Seishi Takamura or D. MacKay (i intend to rewrite this myself later).
+
+All support scripts are licensed under GPLv3.
+
+Matrices over GF(q) are retrieved from http://labsticc.univ-ubs.fr/nb_ldpc/ .
+These matrices are missing the second line (which should be max ov all elements of ine 3 and 4). See GF64_K10008_DC6 and GF256K720Dc4.alist for details. 
+
+https://www.uni-kl.de/channel-codes/channel-codes-database/non-binary-ldpc/ have also been tested (these alist files does not need to be modified). 
+
+======================
+How to use 
+======================
+(tested on linux with GCC):
+To compile: compile_wholefile_gf255
+
+Encode:
+./gfhf8 GF256K720Dc4.alist GF256K720Dc4.mtx enc <indata>  <ldpc_bin>
+
+Generate LLR:
+python bin2llr.py <ldpc_bin> <ldpc_llr>
+
+Decode:
+./gfhf8 GF256K720Dc4.alist GF256K720Dc4.mtx dec <ldpc_llr> <outdata>
+
+This should produce a decode with 0 iterations for every block.
+
+
+======================
+Use with a modem:
+======================
+Encode as before.
+
+Run trough modem and generate floating point data, 4 byte floats between ~-0.5 (for 0) and +~0.5 (for 1). (Modify float_llr.py if your data is different)
+
+python float2llr.py <soft_out> <ldpc_llr>
+./gfhf8 GF256K720Dc4.alist GF256K720Dc4.mtx dec <ldpc_llr> <outdata>
+
+======================
+Matrix generation
+======================
+To generate encoding matrices based on alist-files see see generate_g.m. It should be sufficent to change the file name of the input and output file. 
+PS: Many matrices from labsticc are singular and cannot be inverted into generating matrices using the script. (Maybe they can by other ways; e.g. by using the whole matrix and not only the leftmost part?)
+
+

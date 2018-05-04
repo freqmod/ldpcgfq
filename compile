@@ -1,0 +1,1 @@
+gcc -DLog2Q=6 ldpc_codec.c -o gfq  -lm -O3 -march=native  -Ofast -g

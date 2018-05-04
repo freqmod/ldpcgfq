@@ -1,0 +1,1 @@
+gcc -DLog2Q=6 ldpc_codec.c -o gfhf  -lm -O3 -march=native  -Ofast -g -Wformat=0  -fopenmp -I. ldpc_codec_whole_file.c  

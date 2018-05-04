@@ -1,0 +1,24 @@
+Example use of ldpc over GF(255):
+In this folder i am storing some files i have been using in an experiment with the LDPC codec. 
+The experment has been performed using a prototype GMSK codec with 12.5 kHz of bandwidth over 869mhz SRD band using 2 limesdrs arond .5 m apart with very low power. I assume this will will be quite similar to an AWGN channel and mainly limited by thermal noise. 
+
+I have encoded a test sample with codec2 700C mode and repeated the file to fit my codec. 
+
+data_soft_00000_00097.float contains soft output data from my modem with an SNR that is not correctable by LDPC, but still that is corrected sufficiently so the data is understandable.
+
+phaseplot.png shows the data plotted as in a QPSK constellation with gnuradio. 
+
+I have included the following files for your testing:
+
+python ~/pgmz/corrtest/ldpc/float2llr.py data_soft_00000_00097.float data_soft_00000_00097.llr
+
+../gfhf8 ../GF256K720Dc4.alist ../GF256K720Dc4.mtx dec data_soft_00000_00097.llr data_soft_00000_00097_decoded.bin
+
+cp data_soft_00000_00097_decoded.bin data_soft_00000_00097_decoded.c2
+
+(the first 8 bytes of the codec2 file (i.e the header) should be copied from the source file, so the codec2 software knows what format it is decoding).
+
+c2dec 700C data_soft_00000_00097_decoded.c2 data_soft_00000_00097_decoded.raw
+
+mplayer -rawaudio rate=8000:channels=1:samplesize=2 -demuxer rawaudio data_soft_00000_00097_decoded.raw
+

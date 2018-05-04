@@ -1,0 +1,3 @@
+This folder contains similar data as the example folder, but with higher SNR (so the LDPC algorithm converges, PS: it is another waveform). See the readme of the example folder on how to use these files. 
+
+See the phaseplot in this folder and compare it to the other folder to get an impression of the SNR difference.
