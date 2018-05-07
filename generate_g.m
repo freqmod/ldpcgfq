@@ -8,8 +8,8 @@ Q = 8;
 #fileID =fopen('GF64_1134_20.alist');
 #outFileName ='GF64_1134_20.mtx';
 
-fileID =fopen('Alist.alist');
-outFileName='Alist.mtx';
+fileID =fopen('LDPC_N128_K64_GF256_UNBPB_exp.alist');
+outFileName='LDPC_N128_K64_GF256_UNBPB_exp.mtx';
 
 N = fscanf(fileID,'%d',1);
 M = fscanf(fileID,'%d',1);

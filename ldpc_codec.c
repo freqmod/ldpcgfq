@@ -198,7 +198,7 @@ alist_matrix_t *ldpc_read_alist(char *chk_fn,char *gen_fn)
   char buf[BUFSIZ];
   FILE *fp = fopen(chk_fn, "rt");
   if (fp == NULL) {
-    fprintf(stderr, "cannot open %s\n", chk_fn);
+    fprintf(stderr, "cannot open >%s<\n", chk_fn);
     exit(-2);
   }
   (void)fgets(buf, sizeof(buf), fp);
@@ -297,7 +297,7 @@ alist_matrix_t *ldpc_read_alist(char *chk_fn,char *gen_fn)
 
   fp = fopen(gen_fn, "rt");
   if (fp == NULL) {
-    fprintf(stderr, "cannot open %s\n", chk_fn);
+    fprintf(stderr, "cannot Open >%s<\n", chk_fn);
     exit(-2);
   }
   (void)fgets(buf, sizeof(buf), fp);
@@ -692,7 +692,7 @@ int dec(alist_decode_state_t * restrict state, uint_fast32_t loop_max, uint8_t *
   return l;
 }
 
-#if LOGQ == 6
+#if Log2Q == 6
 static void gf256togf64(uint_fast32_t N, uint8_t *src, uint8_t *dst)
 {
   for(int i =0;i<(N/4);i++)
